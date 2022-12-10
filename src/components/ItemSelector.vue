@@ -21,6 +21,7 @@ const emit = defineEmits<{
   <Button
     v-for="(light, index) in props.presentation.lights"
     @click="emit('editLight', index)"
+    
     >
     {{ light.type }} {{ index }}
   </Button>
@@ -28,6 +29,7 @@ const emit = defineEmits<{
   <Button
     v-for="(device, index) in props.presentation.devices"
     @click="emit('editDevice', index)"
+    data-a11y-dialog-show="device-editor-drawer"
   >
     {{ device.model }}
   </Button>
