@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { defineEmits } from 'vue';
+import { computed, defineEmits, ref } from 'vue';
 import {Button, ChoiceInput, Dialog } from 'agnostic-vue';
+import type { RenderQuality } from '@/assets/ts/interfaces';
+
+let quality = ref<RenderQuality | undefined>(undefined);
+let format = ref<string | undefined>(undefined);
+
+let isFilled = computed(() => {
+  return quality.value !== undefined && format.value !== undefined;
+})
 
 const emit = defineEmits<{
-  (e: 'exportSetting', quality: string, format: string): void
+  (e: 'exportSetting', quality: RenderQuality, format: string): void
 }>();
 
 
 function submitExport(event: Event){
   let formData = new FormData((event.target as HTMLFormElement));
   //TODO handle lack of completed fields
-  emit('exportSetting', formData.get('quality')!.toString(), formData.get('format')!.toString());
+  emit('exportSetting', formData.get('quality')!.toString() as RenderQuality, formData.get('format')!.toString());
 }
+
 </script>
 
 <template>
@@ -29,29 +38,33 @@ function submitExport(event: Event){
     id="export-quality"
     type="radio"
     :options="[
-      {name: 'quality', value: 'low', label: 'low'},
-      {name: 'quality', value: 'medium', label: 'medium'},
-      {name: 'quality', value: 'high', label: 'high'},
+      {name: 'quality', value: 'LOW', label: 'LOW'},
+      {name: 'quality', value: 'MEDIUM', label: 'MEDIUM'},
+      {name: 'quality', value: 'HIGH', label: 'HIGH'},
     ]"
     legend-label="Quality"
     is-inline
+    @change="(choices) => quality = choices[0]"
   />
 
   <ChoiceInput
     id="export-format"
     type="radio"
     :options="[
+      {name: 'format', value:'png', label: 'png'},
       {name: 'format', value:'jpg', label: 'jpg'},
       {name: 'format', value:'webp', label: 'webp'},
     ]"
     legend-label="Format"
     is-inline
+    @change="(choices) => format = choices[0]"
   />
 
   <Button
     mode="primary"
     is-rounded
     type="submit"
+    :is-disabled="!isFilled"
   >
   Export !
   </Button>

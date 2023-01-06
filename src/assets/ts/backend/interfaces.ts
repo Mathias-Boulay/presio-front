@@ -184,3 +184,14 @@ export type SimplePresentation = {
   id: string;
   name: string;
 }
+
+
+export type User = {
+  id: string;
+  email: string;
+  permissions: ("PERM_USER" | "PERM_ADMIN")[];
+}
+
+export type UserMetaData = {
+  count: number;
+}

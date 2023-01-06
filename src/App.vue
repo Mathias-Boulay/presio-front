@@ -6,7 +6,9 @@ import "agnostic-vue/dist/index.css";
 </script>
 
 <template>
-  <RouterView />
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style scoped>

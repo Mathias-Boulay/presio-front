@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import GoToAppButtonVue from '@/components/GoToAppButton.vue';
 import { Divider } from 'agnostic-vue';
+import LogoVue from '@/components/icons/Logo.vue';
 
 </script>
 
 <template>
   <main class="main-content">
+  <LogoVue />
     <section class="main-section">
       <h1>Presio</h1>
       <h3>Your best opening slide</h3>
@@ -40,6 +42,7 @@ import { Divider } from 'agnostic-vue';
   align-items: stretch  ;
 
   padding: 1rem;
+  max-width: 1280px;
 }
 
 .main-section {

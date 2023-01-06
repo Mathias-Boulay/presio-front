@@ -18,6 +18,7 @@ const ratios : SelectOption[] = [
 <template>
 <Select
  :options="ratios"
+ default-option-label="Export aspect ratio"
  unique-id="aspect-ratio-spinner"
  name="aspect-ratio-spinner"
  label-copy="Select ratio"

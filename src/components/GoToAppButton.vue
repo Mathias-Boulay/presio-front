@@ -9,11 +9,12 @@ const userStore = useUserStore();
 const router = useRouter();
 
 /** Called when the IdP authentication is done */
-const callback: CallbackTypes.TokenResponseCallback = (response) => {
+const callback: CallbackTypes.TokenResponseCallback = async (response) => {
   // This callback will be triggered when the user selects or login to
   // his Google account from the popup
   console.log("Credential JWT string", response);
-  userStore.setAuth('GOOGLE', response.access_token);
+  await userStore.setAuth('GOOGLE', response.access_token);
+
 
   goToApp();
 };

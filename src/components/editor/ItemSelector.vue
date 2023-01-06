@@ -3,9 +3,10 @@
 import { defineProps } from 'vue';
 import { Button } from 'agnostic-vue';
 import type { Presentation } from '@/assets/ts/Presentation';
+import type { UserPresentation } from '@/assets/ts/backend/interfaces';
 
 const props = defineProps<{
-  presentation: Presentation
+  presentation: UserPresentation
 }>();
 
 const emit = defineEmits<{
@@ -23,7 +24,7 @@ const emit = defineEmits<{
     @click="emit('editLight', index)"
     
     >
-    {{ light.type }} {{ index }}
+    {{ light.lightType }} {{ index }}
   </Button>
 
   <Button
@@ -31,7 +32,7 @@ const emit = defineEmits<{
     @click="emit('editDevice', index)"
     data-a11y-dialog-show="device-editor-drawer"
   >
-    {{ device.model }}
+    {{ device.device.name }}
   </Button>
 </div>
 </template>

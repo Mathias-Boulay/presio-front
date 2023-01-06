@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Pagination, usePagingGenerator } from 'agnostic-vue';
-import PresentationItemVue from './PresentationItem.vue';
-import { getPresentationList, getPresentationMetadata } from '@/assets/ts/backend/routes';
-import type { PresentationMetadata, SimplePresentation } from '@/assets/ts/backend/interfaces';
+import ModelPresentationItemVue from './ModelPresentationItem.vue';
+import { getPresentationList, getPresentationMetadata, getPresentationModelList, getPresentationModelMetadata } from '@/assets/ts/backend/routes';
+import type { SimplePresentation } from '@/assets/ts/backend/interfaces';
 
 const presentations: SimplePresentation[][] = [];
 const presentationPerPage = 4;
-let presentationMetadata: PresentationMetadata;
-[presentationMetadata, presentations[1]] = await Promise.all([getPresentationMetadata(), getPresentationList(0, presentationPerPage)]);
+let presentationMetadata;
+[presentationMetadata, presentations[1]] = await Promise.all([getPresentationModelMetadata(), getPresentationModelList(0, presentationPerPage)]);
 const presentationPages = Math.ceil(presentationMetadata.count / presentationPerPage)
 
 const { currentPaginationPage, paginationPages, handlePaginationUpdate } = usePagingGenerator(1, 1, presentationPages);
@@ -23,10 +23,10 @@ async function interceptPageUpdate(newPage: number) {
 
 <template>
 <article class="user-presentations">
-  <h2>Your presentations</h2>
-  <ul>
+  <h2>Model presentations</h2>
+  <ul >
     <li class="user-pres" v-for="(presentation, index) in presentations[currentPaginationPage]">
-      <PresentationItemVue :id="presentation.id" :name="`${(index +1) +  ((currentPaginationPage-1) * presentationPerPage)} - ${presentation.name}`" />
+      <ModelPresentationItemVue :id="presentation.id" :name="`${(index +1) +  ((currentPaginationPage-1) * presentationPerPage)} - ${presentation.name}`" />
     </li>
   </ul>
 
@@ -55,15 +55,13 @@ h2 {
 }
 
 ul {
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
   
   margin-bottom: 1rem;  
 }
 
 li.user-pres { 
    margin-bottom: 0.4rem;  
+   text-align: center;
 }
 
 </style>
