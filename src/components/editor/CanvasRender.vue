@@ -181,6 +181,7 @@ onMounted(async () => {
 
         const texturedMaterial = new THREE.MeshBasicMaterial( { map: texture, side: THREE.DoubleSide } );
         texturedMaterial.needsUpdate = true;
+        // @ts-ignore
         glassChildren.material = texturedMaterial;
       } catch (error) {
         console.warn('Couldn\'t get the image');
