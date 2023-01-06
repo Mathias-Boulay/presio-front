@@ -1,6 +1,6 @@
 
-export const BACK_URL = "http://presio.app"
-export const BACK_API_URL = "http://presio.app/api";
+export const BACK_URL = "https://presio.app"
+export const BACK_API_URL = "https://presio.app/api";
 
 
 export const FORM_FILE = 'FORM_FILE';
